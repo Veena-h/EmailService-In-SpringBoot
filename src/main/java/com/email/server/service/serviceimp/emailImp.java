@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.Random;
 
 @Service
@@ -100,8 +101,9 @@ public class emailImp implements Emailservices
         int otp=r.nextInt(9999)+1000;
 
         SimpleMailMessage sm=new SimpleMailMessage();
-        String msg=" "+otp;
+        String msg=""+otp;
         cookie.setName(msg);
+
         sm.setTo(email);
         sm.setSubject("OTP Verification");
         sm.setText("OTP :" +msg);
@@ -110,10 +112,25 @@ public class emailImp implements Emailservices
         return true;
     }
 
-//    @Override
-//    public boolean verify(String otp)
-//    {
-//      return true;
-//
-//    }
+    @Override
+    public boolean verify(String otp)
+    {
+        String storedOTP = cookie.getName();
+        System.out.println(storedOTP);
+        System.out.println(otp);
+
+        if(otp.equals(storedOTP))
+        {
+            Duration d= Duration.ofSeconds(10);
+            return true;
+        }else
+        {
+            return false;
+        }
+
+
+
+
+
+    }
 }

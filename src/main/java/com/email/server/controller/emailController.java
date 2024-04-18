@@ -3,6 +3,7 @@ package com.email.server.controller;
 
 import com.email.server.entity.Bulkemail;
 import com.email.server.entity.Email;
+import com.email.server.entity.OTP;
 import com.email.server.service.serviceimp.emailImp;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,17 @@ public class emailController
 
 
 
-    @PostMapping("/otpverification/{email}")
-    public boolean otpverification(@PathVariable String email)
+    @PostMapping("/otpsend/{email}")
+    public boolean otpsend(@PathVariable String email)
     {
         return emailImp.otpsend(email);
+    }
+
+
+    @PostMapping("/otpverification")
+    public boolean otpverification(@RequestBody OTP otp)
+    {
+        return emailImp.verify(otp.getOtp());
     }
 
 }

@@ -13,5 +13,5 @@ public interface Emailservices
 
     public boolean otpsend(String email);
 
-//    public  boolean verify(String otp);
+    public  boolean verify(String otp);
 }
