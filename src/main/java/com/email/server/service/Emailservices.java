@@ -11,6 +11,7 @@ public interface Emailservices
 
     public void emailsendWithHTML(String to,String subject,String message) throws MessagingException;
 
+    public boolean otpsend(String email);
 
-
+//    public  boolean verify(String otp);
 }

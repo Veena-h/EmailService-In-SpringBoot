@@ -5,6 +5,7 @@ import com.email.server.service.Emailservices;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.server.Cookie;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,12 +13,15 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 @Service
 public class emailImp implements Emailservices
 {
 
     @Autowired
     JavaMailSender javaMailSender;
+    final Cookie cookie= new Cookie();
 
     final static String From="veenahadimani123@gmail.com";
 
@@ -88,4 +92,28 @@ public class emailImp implements Emailservices
 
 
     }
+
+    @Override
+    public boolean otpsend(String email)
+    {
+        Random r=new Random();
+        int otp=r.nextInt(9999)+1000;
+
+        SimpleMailMessage sm=new SimpleMailMessage();
+        String msg=" "+otp;
+        cookie.setName(msg);
+        sm.setTo(email);
+        sm.setSubject("OTP Verification");
+        sm.setText("OTP :" +msg);
+        sm.setFrom(From);
+        javaMailSender.send(sm);
+        return true;
+    }
+
+//    @Override
+//    public boolean verify(String otp)
+//    {
+//      return true;
+//
+//    }
 }

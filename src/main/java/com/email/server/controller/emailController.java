@@ -6,10 +6,7 @@ import com.email.server.entity.Email;
 import com.email.server.service.serviceimp.emailImp;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/email")
@@ -39,5 +36,12 @@ public class emailController
         emailImp.emailsendWithHTML(e.getTo(),e.getSubject(),e.getMessage());
     }
 
+
+
+    @PostMapping("/otpverification/{email}")
+    public boolean otpverification(@PathVariable String email)
+    {
+        return emailImp.otpsend(email);
+    }
 
 }
