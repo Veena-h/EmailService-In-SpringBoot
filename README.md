@@ -6,7 +6,7 @@ Apache Maven
 SMTP server configuration (e.g., Gmail SMTP settings)
 
 Setup
-1. Clone the repository:
+1. Clone the repository: https://github.com/Veena-h/EmailService-In-SpringBoot.git
 bash
 Copy code
 git clone <repository-url>
